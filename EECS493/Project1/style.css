@@ -1,0 +1,30 @@
+
+html{color:#000;background:#FFF}
+* {
+    margin:0;padding:0
+ }
+
+ol,ul{list-style:none}
+
+.site-header {
+    display: flex;
+    background-color: #2C4762;
+    border:#BBBBBB 3px solid;
+    max-height: 200px;
+}
+.left, .right {
+    flex: 0 0 30px;
+}
+.middle {
+    flex: 1 1 100px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.middle > p {
+    color: #A1ACD1;
+    font-size: 40px;
+    font-weight: bold;
+    
+}
