@@ -1,16 +1,24 @@
 
 html{color:#000;background:#FFF}
-* {
-    margin:0;padding:0
- }
-
+* {margin:0;padding:0}
+nav {margin:15px 0 25px 0;}
+section{margin-top:10px;}
 ol,ul{list-style:none}
+span {white-space: pre;}
+h1{margin-bottom: 5px;}
 
+
+/* Header */
 .site-header {
+    position:fixed;
+    top:0;
     display: flex;
     background-color: #2C4762;
-    border:#BBBBBB 3px solid;
+    border-top:#BBBBBB 3px solid;
+    border-bottom:#BBBBBB 3px solid;
     max-height: 200px;
+    width: 100%;
+
 }
 .left, .right {
     flex: 0 0 30px;
@@ -22,9 +30,71 @@ ol,ul{list-style:none}
     justify-content: center;
 }
 
-.middle > p {
+.middle > h1 {
     color: #A1ACD1;
     font-size: 40px;
-    font-weight: bold;
-    
+    font-weight: bold;   
 }
+
+
+/* Article Content */
+.content {
+    margin: 250px 20px;
+}
+
+.media-container{
+    padding: 15px 0;
+    border-bottom: solid 2px #BBBBBB;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.media {
+    padding: 10px;
+    border: transparent 1px #0000FF;
+    margin: 0px 5px 5px 0;
+}
+
+.media-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.media-container li:nth-child(1) {
+    border: solid 1px #0000FF;
+}
+
+
+
+/* Tool Collections*/
+.full-width {
+    width: 100%;
+}
+
+.center {
+    text-align: center;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.ul-style {
+    list-style:disc;
+}
+
+.italics {
+    font-style: italic;
+}
+.font-size-28 {
+    font-size: 28px;
+}
+.color-blue {
+    color: #0000FF;
+}
+.margin-left-50 {
+    margin-left: 50px;
+}
+
