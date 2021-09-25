@@ -41,6 +41,9 @@ h1{margin-bottom: 5px;}
 .content {
     margin: 250px 20px;
 }
+.media-image {
+    object-fit: cover;
+}
 
 .media-container{
     padding: 15px 0;
