@@ -1,0 +1,64 @@
+/* Main Containers */
+body, button {
+  font-family: VT323;
+}
+button {
+  font-size: xx-large;
+}
+
+.outer-container {
+  height: 720px;
+  width: 1280px;
+  background: #eee;
+  border: 5px solid gainsboro;
+}
+
+.game-window {
+  height: 720px;
+  width: 1280px;
+  float: left;
+  position: relative;
+}
+  
+/* Game Section --- Right Section */
+
+#actual_game{
+    height: 720px;
+    width: 1280px;
+    background-color: black;
+    z-index: 10;
+    right: 0px;
+    top: 0px;
+
+}
+
+#game_right_section {
+    height: 600px;
+    width: 320px;
+    position: absolute;
+    left: 960px;
+    top: 0px;
+    color: white;
+    z-index: 1;
+}
+
+#scoreword, #covid_danger, #level {
+  text-align:center;
+  font-size: 60px;
+}
+
+#score_num, #covid_danger_num, #covid_level {
+  text-align: center;
+  font-size: 40px;
+  color: yellow;
+}
+
+#player {
+  position: absolute;
+  width: 62px;
+  left: 600px;
+  top: 300px;
+  z-index: 9;
+}
+
+/* Add your styling here */
