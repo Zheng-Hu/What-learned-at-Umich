@@ -36,18 +36,25 @@ var touched = false;
 $(document).ready(function () {
     // ====== Startup ====== 
     game_window = $('.game-window');
-    
-    // TODO: ADD MORE
+    player = $("#player");
+    $(window).keydown(keyPressRouter); 
 });
 
 // TODO: ADD YOUR FUNCTIONS HERE
-
+function keyPressRouter(event) {
+  if (RIGHT) {player.css("left", parseInt(player.css("left")) + PERSON_SPEED);}
+  if (LEFT)  {player.css("left", parseInt(player.css("left")) - PERSON_SPEED);}
+  if (DOWN)  {player.css("top", parseInt(player.css("top")) + PERSON_SPEED);}
+  if (UP)    {player.css("top", parseInt(player.css("top")) - PERSON_SPEED);}
+}
 // Keydown event handler
 document.onkeydown = function(e) {
+    console.log(e) 
     if (e.key == 'ArrowLeft') LEFT = true;
     if (e.key == 'ArrowRight') RIGHT = true;
     if (e.key == 'ArrowUp') UP = true;
     if (e.key == 'ArrowDown') DOWN = true;
+    
 }
 
 // Keyup event handler
