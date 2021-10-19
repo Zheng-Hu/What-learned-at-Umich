@@ -63,18 +63,22 @@ button {
 
 .covidComet {
   position: absolute; 
+  z-index: 9;
 }
 
 .covidComet img{
   height: 62px;
   width: 62px;
+  
 }
 
 .vaccine {
   position: absolute;
+  z-index: 9;
 }
 
 .mask {
   position: absolute;
+  z-index: 9;
 }
 
