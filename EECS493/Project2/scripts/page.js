@@ -51,10 +51,22 @@ $(document).ready(function () {
 
 
 function keyPressRouter(event) {
-  if (RIGHT) {player.css("left", parseInt(player.css("left")) + PERSON_SPEED);}
-  if (LEFT)  {player.css("left", parseInt(player.css("left")) - PERSON_SPEED);}
-  if (DOWN)  {player.css("top", parseInt(player.css("top")) + PERSON_SPEED);}
-  if (UP)    {player.css("top", parseInt(player.css("top")) - PERSON_SPEED);}
+  let curPlayerImg = $('#player_img');
+  if (RIGHT) {
+    player.css("left", parseInt(player.css("left")) + PERSON_SPEED);
+    curPlayerImg.attr("src", "./src/player/player_right.gif");
+  }
+  if (LEFT) {
+    player.css("left", parseInt(player.css("left")) - PERSON_SPEED);
+    curPlayerImg.attr("src", "./src/player/player_left.gif");
+  }
+  if (DOWN) {
+    player.css("top", parseInt(player.css("top")) + PERSON_SPEED);
+    curPlayerImg.attr("src", "./src/player/player_down.gif");}
+  if (UP) {
+    player.css("top", parseInt(player.css("top")) - PERSON_SPEED);
+    curPlayerImg.attr("src", "./src/player/player_up.gif");
+  }
 }
 
 // Keydown event handler
@@ -69,6 +81,8 @@ document.onkeydown = function(e) {
 
 // Keyup event handler
 document.onkeyup = function (e) {
+    let curPlayerImg = $('#player_img');
+    curPlayerImg.attr("src", "./src/player/player.gif");
     if (e.key == 'ArrowLeft') LEFT = false;
     if (e.key == 'ArrowRight') RIGHT = false;
     if (e.key == 'ArrowUp') UP = false;
@@ -87,7 +101,7 @@ function createCovidComets() {
 
   // curCovidComet.css("top", spaceship.css("top"));
   // var rocketPosX = parseInt(spaceship.css("left")) + (spaceship.width() / 2);
-  // curRocket.css("left", rocketPosX);
+  // curCovidComet.css("left", rocketPosX);
   
   // Randomly spawn covid comets
   let side = parseInt(getRandomNumber(0,4));
@@ -98,6 +112,9 @@ function createCovidComets() {
     let speedX = Math.pow(COVID_SPEED**2 - speedY**2, 1/2)
     setInterval(function() {
       curCovidComet.css({"left": parseInt(curCovidComet.css("left")) + speedX, "top": parseInt(curCovidComet.css("top")) + speedY});
+      if(parseInt(curCovidComet.css("left")) < 0 || parseInt(curCovidComet.css("right")) < 0 || parseInt(curCovidComet.css("bottom")) < 0) {
+        curCovidComet.remove();
+      }
     },100)
   }
   if (side == 1) {
@@ -106,6 +123,9 @@ function createCovidComets() {
     let speedX = Math.pow(COVID_SPEED**2 - speedY**2, 1/2)
     setInterval(function() {
       curCovidComet.css({"left": parseInt(curCovidComet.css("left")) + speedX, "top": parseInt(curCovidComet.css("top")) - speedY});
+      if(parseInt(curCovidComet.css("left")) < 0 || parseInt(curCovidComet.css("right")) < 0 || parseInt(curCovidComet.css("top")) < 0) {
+        curCovidComet.remove();
+      }
     },100)
   }
   if (side == 2) {
@@ -114,6 +134,9 @@ function createCovidComets() {
     let speedY = Math.pow(COVID_SPEED**2 - speedX**2, 1/2)
     setInterval(function() {
       curCovidComet.css({"left": parseInt(curCovidComet.css("left")) + speedX, "top": parseInt(curCovidComet.css("top")) + speedY});
+      if(parseInt(curCovidComet.css("right")) < 0 || parseInt(curCovidComet.css("top")) < 0 || parseInt(curCovidComet.css("bottom")) < 0) {
+        curCovidComet.remove();
+      }
     },100)
   }
   if (side == 3) {
@@ -122,6 +145,9 @@ function createCovidComets() {
     let speedY = Math.pow(COVID_SPEED**2 - speedX**2, 1/2)
     setInterval(function() {
       curCovidComet.css({"left": parseInt(curCovidComet.css("left")) - speedX, "top": parseInt(curCovidComet.css("top")) + speedY});
+      if(parseInt(curCovidComet.css("left")) < 0 || parseInt(curCovidComet.css("top")) < 0 || parseInt(curCovidComet.css("bottom")) < 0 ) {
+        curCovidComet.remove();
+      }
     },100)
   }
 
