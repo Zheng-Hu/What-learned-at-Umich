@@ -61,4 +61,20 @@ button {
   z-index: 9;
 }
 
-/* Add your styling here */
+.covidComet {
+  position: absolute; 
+}
+
+.covidComet img{
+  height: 62px;
+  width: 62px;
+}
+
+.vaccine {
+  position: absolute;
+}
+
+.mask {
+  position: absolute;
+}
+
