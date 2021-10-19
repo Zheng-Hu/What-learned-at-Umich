@@ -9,10 +9,12 @@ var gwh_gameWindow;
 var spaceship; 
 
 // Counters
-
+var rocketIdx = 1; 
 
 // Constants
 var SPACESHIP_MOVEMENT = 50;   // px
+var ROCKET_SPEED = 10;
+var OBJECT_REFRESH_TIME = 5;
 
 var maxSpaceShipPosX; 
 var maxSpaceShipPosY; 
@@ -61,7 +63,7 @@ function keyPressRouter(event) {
       moveSpaceShip(event.which); 
       break;
     case KEYS.spacebar:
-      // fireRocket();
+      fireRocket();
       break;
     case KEYS.shift: 
       // createAsteroid();
@@ -115,6 +117,24 @@ function moveSpaceShip(direction) {
 function fireRocket() {
   console.log('Firing rocket...');
   // ADD CODE HERE TO MAKE ROCKETS AND FIRE THEM
+  var rocketDivStr = "<div id='r-" + rocketIdx + "' class = 'rocket'> <img src ='resources/img/nagini.png' /> </div>";
+  
+  // add to game window
+  gwh_gameWindow.append(rocketDivStr);
+
+  var curRocket = $('#r-' + rocketIdx);
+  rocketIdx ++;
+
+  curRocket.css("top", spaceship.css("top"));
+  var rocketPosX = parseInt(spaceship.css("left")) + (spaceship.width() / 2);
+  curRocket.css("left", rocketPosX);
+
+  setInterval(function() {
+    curRocket.css("top",parseInt(curRocket.css("top")) - ROCKET_SPEED);
+    if(parseInt(curRocket.css("top")) < 0) {
+      curRocket.remove();
+    }
+  },OBJECT_REFRESH_TIME);
 
 }
 
