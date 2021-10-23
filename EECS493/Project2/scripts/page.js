@@ -42,13 +42,28 @@ var touched = false;
 $(document).ready(function () {
     // ====== Startup ====== 
     game_window = $('.game-window');
+    actual_game = $('#actual_game');
+    actual_game.hide();
+    // setInterval(createCovidComets,1000);
+    // createVaccine();
+    // setInterval(createMask,3000);
     player = $("#player");
+    vaccine = $(".vaccine");
+    mask = $(".mask");
+    setInterval(() => { mask.each(function() {console.log(1)})},100)
     $(window).keydown(keyPressRouter);
-    setInterval(createCovidComets,1000);
-    createVaccine();
-    setInterval(createMask,10000)
+    
+    
 });
 
+function judegeCollide (player,masks) {
+  console.log(masks)
+  if (isColliding(player,masks)){
+    console.log("12312312312");
+  }    
+  
+
+}
 
 function keyPressRouter() {
   let curPlayerImg = $('#player_img');
@@ -88,7 +103,7 @@ function keyPressRouter() {
 
 // Keydown event handler
 document.onkeydown = function(e) {
-    console.log(e) 
+    // console.log(e) 
     if (e.key == 'ArrowLeft') LEFT = true;
     if (e.key == 'ArrowRight') RIGHT = true;
     if (e.key == 'ArrowUp') UP = true;
@@ -107,7 +122,7 @@ document.onkeyup = function (e) {
 }
 
 function createCovidComets() {
-  console.log('Spawning Covid Comets...');
+  // console.log('Spawning Covid Comets...');
   let covidCometDivStr = "<div id='c-" + covidCometIdx + "' class = 'covidComet'> <img src ='src/covidstriod.png' /> </div>";
   
   // add to game window
@@ -122,7 +137,7 @@ function createCovidComets() {
   
   // Randomly spawn covid comets
   let side = parseInt(getRandomNumber(0,4));
-  console.log(side)
+  // console.log(side)
   if (side == 0) {
     curCovidComet.css({"top": 0, "left" : getRandomNumber(0,maxPersonPosX)});
     let speedY = getRandomNumber(0, COVID_SPEED);
@@ -171,7 +186,7 @@ function createCovidComets() {
 }
 
 function createVaccine() {
-  console.log('Spawning Vaccine');
+  // console.log('Spawning Vaccine');
   let vaccineDivStr = "<div id='v-" + vaccineIdx + "' class = 'vaccine'> <img src ='src/vacc.gif' /> </div>";
   game_window.append(vaccineDivStr);
 
@@ -187,7 +202,7 @@ function createVaccine() {
 }
 
 function createMask() {
-  console.log('Spawning Mask');
+  // console.log('Spawning Mask');
   let maskDivStr = "<div id='m-" + maskIdx + "' class = 'mask'> <img src ='src/mask.gif' /> </div>";
   game_window.append(maskDivStr);
 
@@ -199,7 +214,7 @@ function createMask() {
   // Remove the mask
   setTimeout(function() {
     curMask.remove();
-  },maskGone)
+  },100000)
 }
 
 
