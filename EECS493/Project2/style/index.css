@@ -36,10 +36,9 @@ p {
 
 .menu-content {
   width:100%;
-  height:620px;
+  height:615px;
   text-align: center;
   background-image: url('../src/frontpage_background.jpg');
-
   background-size:cover;
   overflow:hidden
 
@@ -54,8 +53,25 @@ p {
 
 }
 
+/* Game Over Page */
+#game-over-page{
+  padding-top: 20px;
+  display: none;
+  background-color: #A00;
+  width:400px;
+  height:250px;
+  margin:auto;
+}
+
+#game-over-page p{
+  color:blue;
+  font-size:30px;
+}
+
+
 /* Settings */
 #Settings {
+  display: none;
   width:51%;
   height:700px;
   background-color: blue;
@@ -98,9 +114,6 @@ p {
   font-size:40px;
 }
 
-#Settings .difficulty-box button:focus{
-  border: solid 5px yellow;
-}
 
 #close-button {
   margin-top:80px;
@@ -114,8 +127,48 @@ p {
   cursor: pointer;
 }
 
-/* Game Section --- Right Section */
+/* Tutorial */
+#Tutorial {
+  display:none;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height:721px;
+  background-color: gainsboro;
+  text-align: center;
+}
 
+#Tutorial p {
+  font-size: 50px;
+}
+
+#Tutorial button {
+  margin:auto;
+  margin-top:20px;
+  display:block;
+  width: 200px;
+  height: 75px;
+}
+
+/* Get Ready Splash Screen */
+#get_ready{
+  font-size:90px;
+  color:white;
+  margin-bottom:50px;
+}
+
+#text{
+  font-size:50px;
+  color:white;
+  margin-top: 50px;
+}
+
+#get_ready_splash_screen{
+  text-align: center;
+  margin-top: 200px;
+}
+
+/* Game Section --- Right Section */
 #actual_game{
     height: 720px;
     width: 1280px;
@@ -123,7 +176,8 @@ p {
     z-index: 10;
     right: 0px;
     top: 0px;
-
+    overflow: hidden;
+    display: none;
 }
 
 #game_right_section {
@@ -149,7 +203,8 @@ p {
 
 #player {
   position: absolute;
-  width: 62px;
+  width: 55px;
+  height:55px;
   left: 600px;
   top: 300px;
   z-index: 9;
@@ -158,6 +213,8 @@ p {
 .covidComet {
   position: absolute; 
   z-index: 9;
+  height:62px;
+  width:62px;
 }
 
 .covidComet img{
@@ -169,10 +226,13 @@ p {
 .vaccine {
   position: absolute;
   z-index: 9;
+  height: 57px;
+  width: 57px;
 }
 
 .mask {
   position: absolute;
   z-index: 9;
+  width: 70px;
+  height: 33px;
 }
-

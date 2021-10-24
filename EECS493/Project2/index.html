@@ -14,21 +14,29 @@
 <body>
   <div class='outer-container'>
       <div class='game-window'>
-        
-        
         <!-- Main Menu -->
         <div id="main-menu">
           <div class = "menu-header">
             Covid Comets
           </div>
           <div class = "menu-content">
-            <button class = "menu-content-button">
+            <button id = "play-button" class = "menu-content-button">
               Play game!
             </button>
             <button id = "setting-button" class = "menu-content-button">
               Settings
             </button>
+
+            <!-- Game Over Page -->
+            <div style="margin-top:100px;" id="game-over-page">
+              <p>Game Over!</p>
+              <p>You have to quarantine!</p>
+              <p id="game-over-score"></p>
+              <button id="start-over-button">Start Over</button>
+            </div>
           </div>
+
+          <!-- Settings -->
           <div id = "Settings">
             <p>Settings</p>
             <div class = "volume-bar-box">
@@ -36,39 +44,51 @@
               <p id = "volume"></p>
               <input type="range" min="1" max="100" value="50" class="slider" >
             </div>
-
             <div class = "difficulty-box">
               <p>Difficulty: </p>
-              <button>Easy</button>
-              <button>Normal</button>
-              <button>Hard</button>
+              <button id="setting-easy-button">Easy</button>
+              <button id="setting-normal-button">Normal</button>
+              <button id="setting-hard-button">Hard</button>
             </div>
             <button id = "close-button">Close</button>
           </div>
         </div>
 
-        <!-- Settings -->
-
         <!-- Tutorial -->
+        <div id = "Tutorial">
+          <p style="font-size: 75px; font-weight:bold;">How to play</p>
+          <P>Avoid COVID particles!</P>
+          <img src="./src/covidstriod.png" width="100" height="100">
+          <p>Collect masks and vaccines!</p>
+          <p>Gain as many points as possible!</p>
+          <img src="./src/mask.gif" width="150" height="70">
+          <img style="margin-left: 50px;" src="./src/vacc.gif" width="100" height="100">
+          <button id = "start-button">Start</button>
+        </div>
 
         <!-- Actual Game -->
         <div id="actual_game">
+          <div id="get_ready_splash_screen">
+            <div id = "get_ready">Get Ready!</div>
+            <img src="./src/arrowkeys.png">
+            <div id = "text">Use arrow keys to move</div>
+          </div>
+
           <div class="asteroidSection">
               <div class="curAstroid"> </div>
           </div>
           <div id = "player">
-            <img id = "player_img" src="./src/player/player.gif">
+            <img id = "player_img">
           </div>
-          
           <div id="game_right_section">
               <div id="scoreword">
                   SCORE
                   <div id="score_num">0</div>
               </div>
               <div id="covid_danger">COVID DANGER
-              <div id="covid_danger_num"></div></div>
+              <div id="covid_danger_num">20</div></div>
               <div id="level">LEVEL
-              <div id="covid_level"></div></div>
+              <div id="covid_level">1</div></div>
           </div>
         </div>    
       </div> <!-- end game-window -->
