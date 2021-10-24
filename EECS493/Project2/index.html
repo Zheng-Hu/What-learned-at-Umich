@@ -15,6 +15,7 @@
   <div class='outer-container'>
       <div class='game-window'>
         
+        
         <!-- Main Menu -->
         <div id="main-menu">
           <div class = "menu-header">
@@ -24,9 +25,25 @@
             <button class = "menu-content-button">
               Play game!
             </button>
-            <button class = "menu-content-button">
+            <button id = "setting-button" class = "menu-content-button">
               Settings
             </button>
+          </div>
+          <div id = "Settings">
+            <p>Settings</p>
+            <div class = "volume-bar-box">
+              <p>Volume:</p>
+              <p id = "volume"></p>
+              <input type="range" min="1" max="100" value="50" class="slider" >
+            </div>
+
+            <div class = "difficulty-box">
+              <p>Difficulty: </p>
+              <button>Easy</button>
+              <button>Normal</button>
+              <button>Hard</button>
+            </div>
+            <button id = "close-button">Close</button>
           </div>
         </div>
 
