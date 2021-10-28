@@ -31,6 +31,7 @@
    </style>
    <body >
      <div id='app'>
+        {{info}}
       <nav class="navbar navbar-default">
          <div class="container">
             <div class="navbar-header">
@@ -42,7 +43,7 @@
          <div class = "row searchbar" >
             <div class = "col-lg-12 col-md-12 col-sm-12">
                <h4>Enter the name of the artist and enter : </h4>
-               <input type="text">
+               <input v-model="searchValue" @keyup.enter="searchHandler" type="text">
             </div>
          </div>
 
