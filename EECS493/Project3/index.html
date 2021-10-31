@@ -17,6 +17,13 @@
       padding-bottom: 5px;
       padding-top: 3px;
       }
+      h4{
+         font-size: small;
+         margin:0;
+      }
+      .tab-content-box{
+         margin-bottom: 5px;;
+      }
       .genre{
       border:solid 2px;
       border-radius: 3px;
@@ -25,13 +32,16 @@
       background-color:#ccc;
       padding:2px;
       }
+      .inline-block{
+         display: inline-block;
+      }
       /*img {
       height: 200px;
       }*/
    </style>
    <body >
      <div id='app'>
-        {{info}}
+      
       <nav class="navbar navbar-default">
          <div class="container">
             <div class="navbar-header">
@@ -39,6 +49,7 @@
             </div>
          </div>
       </nav>
+
       <div class = "container">
          <div class = "row searchbar" >
             <div class = "col-lg-12 col-md-12 col-sm-12">
@@ -48,46 +59,154 @@
          </div>
 
          <div class = "col-lg-12 col-md-12 col-sm-12">
-
+            <h4>Search Result (Total {{artistNum}} Found.)</h4>
            <div>
-              <button class = "btn btn-success" style="margin:2px;">ALL</button>
+              <button @click = "filterButtonHandler(0)" class = "btn btn-success" style="margin:2px;">ALL</button>
+              <button @click = "filterButtonHandler(1)" class = "btn btn-primary" style="margin:2px;">New Age</button>
+              <button @click = "filterButtonHandler(2)" class = "btn btn-primary" style="margin:2px;">Hip-Hop/Rap</button>
+              <button @click = "filterButtonHandler(3)" class = "btn btn-primary" style="margin:2px;">Pop</button>
+              <button @click = "filterButtonHandler(4)" class = "btn btn-primary" style="margin:2px;">Alternative</button>
+              <button @click = "filterButtonHandler(5)" class = "btn btn-primary" style="margin:2px;">Electronic</button>
+              <button @click = "filterButtonHandler(6)" class = "btn btn-primary" style="margin:2px;">Dance</button>
            </div>
            <h4>
               List of results
            </h4>
          </div>
 
-       <div>
+         <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Reset to original</a></li>
+              <li><a href="#">Collection Name</a></li>
+              <li><a href="#">Price</a></li>
+            </ul>
+          </div>
+
+       <div v-for= "(item, index) in resultList" v-if= "index % 2 ==0">
          <div class = "col-lg-6 col-md-6 col-sm-6" style='margin-bottom: 50px; display: inline; height: 250px' >
            <div class="col-sm-4" style='max-width:200px;margin-right: 30px'>
-             <img style='width: 120%; display: inline; ' v-bind:src="artist1">
+             <img style='width: 120%; display: inline; ' :src="resultList[index].artworkUrl100">
           </div>
 
           <div class="col-sm-6" style='max-height: 250px;'>
              <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" >Tab1</a></li>
-                <li><a data-toggle="tab">Tab2</a></li>
+                <li @click = "tabNum=index" :class="{active:tabNum!=index+1}"><a>Description</a></li>
+                <li @click = "tabNum=index+1" :class="{active:tabNum!=index}"><a>Track Info.</a></li>
              </ul>
              <div class="tab-content">
+                <div class="tab-content-description" v-show= "tabNum != index+1">
+                   <div class="tab-content-box">
+                     <h4 class="inline-block">Artist Name: </h4> 
+                     <span>{{resultList[index].artistName}}</span>
+                   </div>
+
+                   <div class="tab-content-box">
+                     <h4 class="inline-block">Collection Name: </h4> 
+                     <span>{{resultList[index].trackName}}</span>
+                   </div>
+
+                   <div class="tab-content-box">
+                     <h4 class="inline-block">Price: </h4> 
+                     <span>{{resultList[index].trackPrice}}</span>
+                   </div>
+
+                   <div class="tab-content-box">
+                     <h4 class="inline-block">Kind: </h4> 
+                     <span>{{resultList[index].kind}}</span>
+                   </div>
+
+                   <div class="tab-content-box">
+                     <h4 class="inline-block">Preview: </h4> 
+                     <a href="{{resultList[index].trackViewUrl}}"> Link</a>
+                   </div>  
+                </div>
+
+                <div class="tab-content-trackInfo" v-show= "tabNum!=index">
+                  <div class="tab-content-box">
+                     <h4 class="inline-block">Track ID: </h4> 
+                     <span>{{resultList[index].trackId}}</span>
+                   </div>
+                   
+                   <div class="tab-content-box">
+                     <h4 class="inline-block">Country: </h4> 
+                     <span>{{resultList[index].country}}</span>
+                   </div>  
+                </div>
              </div>
            </div>
-
          </div>
 
          <div class = "col-lg-6 col-md-6 col-sm-6" style='margin-bottom: 50px; display: inline; height: 250px' >
            <div class="col-sm-4" style='max-width:200px;margin-right: 30px'>
-             <img style='width: 120%; display: inline; ' v-bind:src="artist2">
+             <img style='width: 120%; display: inline; ' :src="resultList[index+1].artworkUrl100">
           </div>
-
+          
           <div class="col-sm-6" style='max-height: 250px;'>
              <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" >Tab1</a></li>
-                <li><a data-toggle="tab">Tab2</a></li>
+                <li class="active"><a data-toggle="tab" >Description</a></li>
+                <li><a data-toggle="tab">Track Info.</a></li>
              </ul>
              <div class="tab-content">
+                <div class="tab-content-description" v-show= "tabNum==0">
+                   <div class="tab-content-box">
+                     <h4 class="inline-block">Artist Name: </h4> 
+                     <span>{{resultList[index+1].artistName}}</span>
+                   </div>
+
+                   <div class="tab-content-box">
+                     <h4 class="inline-block">Collection Name: </h4> 
+                     <span>{{resultList[index+1].trackName}}</span>
+                   </div>
+
+                   <div class="tab-content-box">
+                     <h4 class="inline-block">Price: </h4> 
+                     <span>{{resultList[index+1].trackPrice}}</span>
+                   </div>
+
+                   <div class="tab-content-box">
+                     <h4 class="inline-block">Kind: </h4> 
+                     <span>{{resultList[index+1].kind}}</span>
+                   </div>
+
+                   <div class="tab-content-box">
+                     <h4 class="inline-block">Preview: </h4> 
+                     <a href="{{resultList[index+1].trackViewUrl}}"> Link</a>
+                   </div>  
+                </div>
+
+                <div class="tab-content-trackInfo" v-show= "tabNum==1">
+                  <div class="tab-content-box">
+                     <h4 class="inline-block">Track ID: </h4> 
+                     <span>{{resultList[index+1].trackId}}</span>
+                   </div>
+                   
+                   <div class="tab-content-box">
+                     <h4 class="inline-block">Country: </h4> 
+                     <span>{{resultList[index+1].country}}</span>
+                   </div>  
+                </div>
              </div>
            </div>
+         </div>
 
+         <!-- Add last image if total number of image is not even -->
+         <div v-if = "resultList.length % 2 != 0">
+            <div class = "col-lg-6 col-md-6 col-sm-6" style='margin-bottom: 50px; display: inline; height: 250px' >
+               <div class="col-sm-4" style='max-width:200px;margin-right: 30px'>
+                 <img style='width: 120%; display: inline; ' :src="resultList[resultList.length-1].artworkUrl100">
+              </div>
+    
+              <div class="col-sm-6" style='max-height: 250px;'>
+                 <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" >Description</a></li>
+                    <li><a data-toggle="tab">Track Info.</a></li>
+                 </ul>
+                 <div class="tab-content">
+                 </div>
+               </div>
+             </div>
          </div>
       </div>
     </div>
