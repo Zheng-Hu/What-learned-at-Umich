@@ -90,13 +90,13 @@
              <img style='width: 120%; display: inline; ' :src="resultList[index].artworkUrl100">
           </div>
 
-          <div class="col-sm-6" style='max-height: 250px;'>
+          <div :id="index" class="col-sm-6" style='max-height: 250px;'>
              <ul class="nav nav-tabs">
-                <li @click = "tabNum=index" :class="{active:tabNum!=index+1}"><a>Description</a></li>
-                <li @click = "tabNum=index+1" :class="{active:tabNum!=index}"><a>Track Info.</a></li>
+                <li class="active"><a data-toggle="pill" :href="'#Description' + index">Description</a></li>
+                <li><a data-toggle="pill" :href="'#Track' + index">Track Info.</a></li>
              </ul>
              <div class="tab-content">
-                <div class="tab-content-description" v-show= "tabNum != index+1">
+                <div :id="'Description' + index" class="tab-pane fade in active">
                    <div class="tab-content-box">
                      <h4 class="inline-block">Artist Name: </h4> 
                      <span>{{resultList[index].artistName}}</span>
@@ -123,7 +123,7 @@
                    </div>  
                 </div>
 
-                <div class="tab-content-trackInfo" v-show= "tabNum!=index">
+                <div :id="'Track' + index" class="tab-pane fade">
                   <div class="tab-content-box">
                      <h4 class="inline-block">Track ID: </h4> 
                      <span>{{resultList[index].trackId}}</span>
@@ -145,11 +145,11 @@
           
           <div class="col-sm-6" style='max-height: 250px;'>
              <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" >Description</a></li>
-                <li><a data-toggle="tab">Track Info.</a></li>
+               <li class="active"><a data-toggle="pill" :href="'#Description' + index + 1">Description</a></li>
+               <li><a data-toggle="pill" :href="'#Track' + index + 1">Track Info.</a></li>
              </ul>
              <div class="tab-content">
-                <div class="tab-content-description" v-show= "tabNum==0">
+               <div :id="'Description' + index + 1" class="tab-pane fade in active">
                    <div class="tab-content-box">
                      <h4 class="inline-block">Artist Name: </h4> 
                      <span>{{resultList[index+1].artistName}}</span>
@@ -176,7 +176,7 @@
                    </div>  
                 </div>
 
-                <div class="tab-content-trackInfo" v-show= "tabNum==1">
+                <div :id="'Track' + index + 1" class="tab-pane fade">
                   <div class="tab-content-box">
                      <h4 class="inline-block">Track ID: </h4> 
                      <span>{{resultList[index+1].trackId}}</span>

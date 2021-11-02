@@ -2,7 +2,6 @@ new Vue({
   el: '#app',
   data () {
     return {
-      tabNum:0,
       info: null,
       searchValue:'',
       artistNum: 0,
