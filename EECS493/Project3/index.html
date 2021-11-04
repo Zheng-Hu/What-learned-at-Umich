@@ -59,20 +59,20 @@
          </div>
 
          <div class = "col-lg-12 col-md-12 col-sm-12">
-            <h4>Search Result (Total {{artistNum}} Found.)</h4>
-           <div>
-              <button @click = "filterButtonHandler(0)" class = "btn btn-success" style="margin:2px;">ALL</button>
-              <button @click = "filterButtonHandler(1)" class = "btn btn-primary" style="margin:2px;">New Age</button>
-              <button @click = "filterButtonHandler(2)" class = "btn btn-primary" style="margin:2px;">Hip-Hop/Rap</button>
-              <button @click = "filterButtonHandler(3)" class = "btn btn-primary" style="margin:2px;">Pop</button>
-              <button @click = "filterButtonHandler(4)" class = "btn btn-primary" style="margin:2px;">Alternative</button>
-              <button @click = "filterButtonHandler(5)" class = "btn btn-primary" style="margin:2px;">Electronic</button>
-              <button @click = "filterButtonHandler(6)" class = "btn btn-primary" style="margin:2px;">Dance</button>
-           </div>
-           <h4>
-              List of results
-           </h4>
+            <h4>Search Result (Total {{resultList.length}} Found.)</h4>
          </div>
+
+         <div>
+            <button @click = "filterButtonHandler(0)" :class = "btnAll" style="margin:2px;">ALL</button>
+            <button @click = "filterButtonHandler(1)" :class = "btnNewAge" style="margin:2px;">New Age</button>
+            <button @click = "filterButtonHandler(2)" :class = "btnRap" style="margin:2px;">Hip-Hop/Rap</button>
+            <button @click = "filterButtonHandler(3)" :class = "btnPop" style="margin:2px;">Pop</button>
+            <button @click = "filterButtonHandler(4)" :class = "btnAlternative" style="margin:2px;">Alternative</button>
+            <button @click = "filterButtonHandler(5)" :class = "btnElectronic" style="margin:2px;">Electronic</button>
+            <button @click = "filterButtonHandler(6)" :class = "btnDance" style="margin:2px;">Dance</button>
+         </div>
+
+         <h4>List of results</h4>
 
          <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
@@ -84,7 +84,7 @@
             </ul>
           </div>
 
-       <div v-for= "(item, index) in resultList" v-if= "index % 2 ==0">
+       <div v-for= "(item, index) in resultList" v-if= "index % 2 ==0 && resultList.length > 1">
          <div class = "col-lg-6 col-md-6 col-sm-6" style='margin-bottom: 50px; display: inline; height: 250px' >
            <div class="col-sm-4" style='max-width:200px;margin-right: 30px'>
              <img style='width: 120%; display: inline; ' :src="resultList[index].artworkUrl100">
@@ -138,7 +138,7 @@
            </div>
          </div>
 
-         <div class = "col-lg-6 col-md-6 col-sm-6" style='margin-bottom: 50px; display: inline; height: 250px' >
+         <div class = "col-lg-6 col-md-6 col-sm-6" style='margin-bottom: 50px; display: inline; height: 250px' v-if = "index < resultList.length - 1">
            <div class="col-sm-4" style='max-width:200px;margin-right: 30px'>
              <img style='width: 120%; display: inline; ' :src="resultList[index+1].artworkUrl100">
           </div>
@@ -190,26 +190,7 @@
              </div>
            </div>
          </div>
-
-         <!-- Add last image if total number of image is not even -->
-         <div v-if = "resultList.length % 2 != 0">
-            <div class = "col-lg-6 col-md-6 col-sm-6" style='margin-bottom: 50px; display: inline; height: 250px' >
-               <div class="col-sm-4" style='max-width:200px;margin-right: 30px'>
-                 <img style='width: 120%; display: inline; ' :src="resultList[resultList.length-1].artworkUrl100">
-              </div>
-    
-              <div class="col-sm-6" style='max-height: 250px;'>
-                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" >Description</a></li>
-                    <li><a data-toggle="tab">Track Info.</a></li>
-                 </ul>
-                 <div class="tab-content">
-                 </div>
-               </div>
-             </div>
-         </div>
       </div>
-    </div>
   </div>
     <script src="script.js"></script>
 
