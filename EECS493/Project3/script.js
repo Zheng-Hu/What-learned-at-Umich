@@ -9,6 +9,7 @@ new Vue({
       btnAlternative:"btn btn-light",
       btnElectronic:"btn btn-light",
       btnDance:"btn btn-light",
+      playbutton:"play",
       allModel:true,
       info: null,
       searchValue:'',
@@ -24,12 +25,16 @@ new Vue({
       this.initialList = [];
       this.resultList = [];
       await axios
-      .get('https://itunes.apple.com/search?term=' + this.searchValue + '.')
+      .get('https://cors-anywhere.herokuapp.com/itunes.apple.com/search?attribute=allArtistTerm&term=' + this.searchValue )
       .then(response => (this.info = response));
       console.log(this.info)
+      if (this.info.data.resultCount == 0) {
+        alert("No artist found");
+      }
       this.initialList = this.info.data.results;
       if (this.allModel) {
-        this.resultList = this.info.data.results;
+        this.resultList = (this.resultList).concat(this.info.data.results);
+        console.log(this.resultList);
       } else {
         if (this.btnNewAge == "btn btn-primary") {
           this.resultList = (this.resultList).concat((this.initialList).filter(item => item.primaryGenreName == "New Age"));
@@ -49,6 +54,45 @@ new Vue({
         if (this.btnDance == "btn btn-primary") {
           this.resultList = (this.resultList).concat((this.initialList).filter(item => item.primaryGenreName == "Dance"));
         }
+      }
+
+    },
+    playButtonHandler(){
+      if (this.playbutton == "play") {
+       this.playbutton = "stop"; 
+      } else {
+        this.playbutton = "play";
+      }
+    },
+    sortButtonHandler(buttonIndex){
+      if(buttonIndex == 0) {
+        this.resultList = [];
+        this.resultList  = this.resultList.concat(this.initialList);
+      }
+      else if (buttonIndex == 1) {
+        (this.resultList).sort((a,b) => {
+          if(b.collectionName == undefined) {
+            return 1;
+          }
+          if(a.collectionName == undefined) {
+            return -1;
+          } else {
+            if (a.collectionName < b.collectionName) {
+              return -1;
+            }
+            if (a.collectionName > b.collectionName) {
+              return 1;
+            }
+            return 0;
+          }
+        })
+        console.log(this.resultList);
+      }
+      else if (buttonIndex == 2) {
+        (this.resultList).sort((a,b)=> {
+          return (b.collectionPrice - a.collectionPrice);
+        })
+        console.log(this.resultList);
       }
 
     },
