@@ -32,8 +32,28 @@ new Vue({
         alert("No artist found");
       }
       this.initialList = this.info.data.results;
+      for(let i = 0; i < this.initialList.length; i++){
+        if(this.initialList[i].collectionName == undefined) {
+          this.initialList[i].collectionName = "No information provided"
+        }
+        if(this.initialList[i].collectionPrice == undefined) {
+          this.initialList[i].collectionPrice = 0
+        }
+        if(this.initialList[i].kind == undefined) {
+          this.initialList[i].kind = "No information provided"
+        }
+        if(this.initialList[i].trackId== undefined) {
+          this.initialList[i].trackId = "No information provided"
+        }
+        if(this.initialList[i].country == undefined) {
+          this.initialList[i].country = "No information provided"
+        }
+        
+        
+        
+      }
       if (this.allModel) {
-        this.resultList = (this.resultList).concat(this.info.data.results);
+        this.resultList = (this.resultList).concat(this.initialList);
         console.log(this.resultList);
       } else {
         if (this.btnNewAge == "btn btn-primary") {
@@ -92,7 +112,6 @@ new Vue({
         (this.resultList).sort((a,b)=> {
           return (b.collectionPrice - a.collectionPrice);
         })
-        console.log(this.resultList);
       }
 
     },

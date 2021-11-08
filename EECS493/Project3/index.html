@@ -20,6 +20,7 @@
       h4{
          font-size: small;
          margin:0;
+         margin-bottom: 10px;
       }
       .tab-content-box{
          margin-bottom: 5px;;
@@ -34,6 +35,10 @@
       }
       .inline-block{
          display: inline-block;
+      }
+      .dropdown{
+         margin-bottom: 20px;
+         margin-top:10px;
       }
       /*img {
       height: 200px;
@@ -58,10 +63,9 @@
             </div>
          </div>
 
-         <div class = "col-lg-12 col-md-12 col-sm-12">
-            <h4>Search Result (Total {{resultList.length}} Found.)</h4>
-         </div>
-
+         
+         <h4>Search Result (Total {{resultList.length}} Found.)</h4>
+   
          <div>
             <button @click = "filterButtonHandler(0)" :class = "btnAll" style="margin:2px;">ALL</button>
             <button @click = "filterButtonHandler(1)" :class = "btnNewAge" style="margin:2px;">New Age</button>
@@ -110,18 +114,20 @@
                    </div>
 
                    <div class="tab-content-box">
-                     <h4 class="inline-block">Price: </h4> 
+                     <h4 class="inline-block">Price: </h4>
                      <span>{{resultList[index].collectionPrice}}</span>
                    </div>
 
                    <div class="tab-content-box">
-                     <h4 class="inline-block">Kind: </h4> 
+                     <h4 class="inline-block">Kind: </h4>
+                  
                      <span>{{resultList[index].kind}}</span>
                    </div>
 
                    <div class="tab-content-box">
                      <h4 class="inline-block">Preview: </h4> 
-                     <a href="{{resultList[index].trackViewUrl}}"> Link</a>
+                     <h4 v-if="resultList[index].trackViewUrl == undefined">No information provided</h4> 
+                     <a v-else :href= "resultList[index].trackViewUrl"> Link</a>
                    </div>
                    <div class="tab-content-box">
                       <button @click = "playButtonHandler()">{{playbutton}}</button>
@@ -162,12 +168,12 @@
 
                    <div class="tab-content-box">
                      <h4 class="inline-block">Collection Name: </h4> 
-                     <span>{{resultList[index+1].trackName}}</span>
+                     <span>{{resultList[index+1].collectionName}}</span>
                    </div>
 
                    <div class="tab-content-box">
                      <h4 class="inline-block">Price: </h4> 
-                     <span>{{resultList[index+1].trackPrice}}</span>
+                     <span>{{resultList[index+1].collectionPrice}}</span>
                    </div>
 
                    <div class="tab-content-box">
@@ -176,8 +182,8 @@
                    </div>
 
                    <div class="tab-content-box">
-                     <h4 class="inline-block">Preview: </h4> 
-                     <a href="{{resultList[index+1].trackViewUrl}}"> Link</a>
+                     <h4 v-if="resultList[index+1].trackViewUrl == undefined">No information provided</h4> 
+                     <a v-else :href= "resultList[index+1].trackViewUrl"> Link</a>
                    </div>
                    <div class="tab-content-box">
                      <button>{{playbutton}}</button>
