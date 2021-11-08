@@ -10,17 +10,19 @@ new Vue({
       initialList:[],
       resultList:[],
       genereButtonSet:new Set(),
-      genereButtonStyleMap:new Map(),
       genereButtonSelectedSet:new Set(),
-      buttonNum:0,
+      genereButtonStyleMap:new Map(),
       resultCount:0,
+      dropdownFirstButton:'active',
+      dropdownSecondButton:'inactive',
+      dropdownThirdButton:'inactive',
     }
   },
   methods:{
     async searchHandler() {
-      console.log(this.searchValue);
       this.initialList = [];
       this.resultList = [];
+      this.resultCount = 0,
       await axios
       .get('https://cors-anywhere.herokuapp.com/itunes.apple.com/search?attribute=allArtistTerm&term=' + this.searchValue )
       .then(response => (this.info = response));
@@ -31,7 +33,6 @@ new Vue({
         alert("No artist found");
       }
 
-
       this.initialList = this.info.data.results;
       this.resultList = this.resultList.concat(this.initialList);
       this.resultCount = this.resultList.length;
@@ -40,7 +41,6 @@ new Vue({
         (this.genereButtonSet).add(this.initialList[i].primaryGenreName);
         (this.genereButtonSelectedSet).add(this.initialList[i].primaryGenreName);
       };
-
 
       // Initial the form of genere button
       this.genereButtonSet.forEach((item)=>{this.genereButtonStyleMap.set(item+"GenereButton","btn btn-light")})
@@ -63,73 +63,41 @@ new Vue({
           this.initialList[i].country = "No information provided"
         }
       }
-   
-
-      // if (this.allModel) {
-      //   this.resultList = (this.resultList).concat(this.initialList);
-      //   console.log(this.resultList);
-      // } else {
-      //   if (this.btnNewAge == "btn btn-primary") {
-      //     this.resultList = (this.resultList).concat((this.initialList).filter(item => item.primaryGenreName == "New Age"));
-      //   }
-      //   if (this.btnRap == "btn btn-primary") {
-      //     this.resultList = (this.resultList).concat((this.initialList).filter(item => item.primaryGenreName == "Hip-Hop/Rap"));
-      //   }
-      //   if (this.btnPop == "btn btn-primary") {
-      //     this.resultList = (this.resultList).concat((this.initialList).filter(item => item.primaryGenreName == "Pop"));
-      //   }
-      //   if (this.btnAlternative == "btn btn-primary") {
-      //     this.resultList = (this.resultList).concat((this.initialList).filter(item => item.primaryGenreName == "Alternative"));
-      //   }
-      //   if (this.btnElectronic == "btn btn-primary") {
-      //     this.resultList = (this.resultList).concat((this.initialList).filter(item => item.primaryGenreName == "Electronic"));
-      //   }
-      //   if (this.btnDance == "btn btn-primary") {
-      //     this.resultList = (this.resultList).concat((this.initialList).filter(item => item.primaryGenreName == "Dance"));
-      //   }
-      // }
-
-    },
-    playButtonHandler(){
-      if (this.playbutton == "play") {
-       this.playbutton = "stop"; 
-      } else {
-        this.playbutton = "play";
-      }
     },
     sortButtonHandler(buttonIndex){
       if(buttonIndex == 0) {
+        // Initial the resultList
         this.resultList = [];
         this.resultList  = this.resultList.concat(this.initialList);
+        this.dropdownFirstButton = 'active';
+        this.dropdownSecondButton = 'inactive';
+        this.dropdownThirdButton = 'inactive';
       }
+      
       else if (buttonIndex == 1) {
+        this.dropdownSecondButton = 'active';
+        this.dropdownFirstButton = 'inactive';
+        this.dropdownThirdButton = 'inactive';
         (this.resultList).sort((a,b) => {
-          if(b.collectionName == undefined) {
+          if (a.collectionName < b.collectionName) {
+            return -1;
+          }
+          if (a.collectionName > b.collectionName) {
             return 1;
           }
-          if(a.collectionName == undefined) {
-            return -1;
-          } else {
-            if (a.collectionName < b.collectionName) {
-              return -1;
-            }
-            if (a.collectionName > b.collectionName) {
-              return 1;
-            }
-            return 0;
-          }
+          return 0;
         })
-        console.log(this.resultList);
       }
       else if (buttonIndex == 2) {
+        this.dropdownThirdButton = 'active';
+        this.dropdownFirstButton = 'inactive';
+        this.dropdownSecondButton = 'inactive';
         (this.resultList).sort((a,b)=> {
           return (b.collectionPrice - a.collectionPrice);
         })
       }
-
     },
     filterButtonHandler(buttonText){
-      console.log(buttonText);
       if(buttonText == "All") {
         if (this.btnAll == "btn btn-success"){
           this.btnAll = "btn light";
@@ -160,11 +128,16 @@ new Vue({
           this.genereButtonStyleMap = new Map(this.genereButtonStyleMap.set(buttonText + 'GenereButton', "btn btn-light"));
           (this.genereButtonSelectedSet).delete(buttonText);
           this.resultCount -= (this.resultList.filter(item => item.primaryGenreName == buttonText)).length;
-          console.log(this.genereButtonSelectedSet);
-  
         }
       }
-    }
+    },
+    playButtonHandler(){
+      if (this.playbutton == "play") {
+       this.playbutton = "stop"; 
+      } else {
+        this.playbutton = "play";
+      }
+    },
   }
 })
 

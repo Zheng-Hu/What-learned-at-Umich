@@ -70,17 +70,14 @@
          <div style="display:inline" v-for= "item in genereButtonSet">
             <button @click = "filterButtonHandler(item)" :class = "genereButtonStyleMap.get(item+'GenereButton')" style="margin:2px;">{{item}}</button>
          </div>
-   
-
          <h4>List of results</h4>
-
          <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-              <li><a @click="sortButtonHandler(0)" class="active">Reset to original</a></li>
-              <li><a @click="sortButtonHandler(1)" href="#">Collection Name</a></li>
-              <li><a @click="sortButtonHandler(2)" href="#">Price</a></li>
+              <li :class="dropdownFirstButton"> <a @click="sortButtonHandler(0)">Reset to original</a></li>
+              <li :class="dropdownSecondButton"><a @click="sortButtonHandler(1)" href="#">Collection Name</a></li>
+              <li :class="dropdownThirdButton"> <a @click="sortButtonHandler(2)" href="#">Price</a></li>
             </ul>
           </div>
       
