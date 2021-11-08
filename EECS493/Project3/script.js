@@ -12,6 +12,7 @@ new Vue({
       genereButtonSet:new Set(),
       genereButtonSelectedSet:new Set(),
       genereButtonStyleMap:new Map(),
+      playButtonMap: new Map(),
       resultCount:0,
       dropdownFirstButton:'active',
       dropdownSecondButton:'inactive',
@@ -43,7 +44,12 @@ new Vue({
       };
 
       // Initial the form of genere button
-      this.genereButtonSet.forEach((item)=>{this.genereButtonStyleMap.set(item+"GenereButton","btn btn-light")})
+      this.genereButtonSet.forEach((item)=>{this.genereButtonStyleMap.set(item+"GenereButton","btn btn-light")});
+
+      // Initial play button
+      for(let i = 0; i < this.resultList.length; i++ ) {
+        this.playButtonMap.set("playButton-" + this.resultList[i].trackId, ["play", new Audio(this.resultList[i].previewUrl)]);
+      }
 
       // Change the form of data
       for(let i = 0; i < this.initialList.length; i++){
@@ -131,11 +137,13 @@ new Vue({
         }
       }
     },
-    playButtonHandler(){
-      if (this.playbutton == "play") {
-       this.playbutton = "stop"; 
+    playButtonHandler(playButtonIndex){
+      if (this.playButtonMap.get("playButton-" + playButtonIndex)[0] == "play") {
+        this.playButtonMap = new Map(this.playButtonMap.set("playButton-" + playButtonIndex,["stop", this.playButtonMap.get("playButton-" + playButtonIndex)[1]]));
+        this.playButtonMap.get("playButton-" + playButtonIndex)[1].play();
       } else {
-        this.playbutton = "play";
+        this.playButtonMap = new Map(this.playButtonMap.set("playButton-" + playButtonIndex,["play",this.playButtonMap.get("playButton-" + playButtonIndex)[1]]));
+        this.playButtonMap.get("playButton-" + playButtonIndex)[1].pause();
       }
     },
   }

@@ -63,7 +63,6 @@
             </div>
          </div>
 
-         
          <h4>Search Result (Total {{resultCount}} Found.)</h4>
 
          <button @click = "filterButtonHandler('All')" :class = "btnAll" style="margin:2px;">ALL</button>
@@ -81,8 +80,7 @@
             </ul>
           </div>
       
-       <div v-for= "(item, index) in resultList" v-if= "index % 2 ==0">
-         
+       <div  v-for= "(item, index) in resultList" v-if= "index % 2 ==0">
          <div class = "col-lg-6 col-md-6 col-sm-6" style='margin-bottom: 50px; display: inline; height: 250px' v-if=" genereButtonSelectedSet.has(resultList[index].primaryGenreName)" >
            <div class="col-sm-4" style='max-width:200px;margin-right: 30px'>
              <img style='width: 120%; display: inline; ' :src="resultList[index].artworkUrl100">
@@ -122,7 +120,7 @@
                      <a v-else :href= "resultList[index].trackViewUrl"> Link</a>
                    </div>
                    <div class="tab-content-box">
-                      <button @click = "playButtonHandler()">{{playbutton}}</button>
+                     <button @click = "playButtonHandler(resultList[index].trackId)">{{playButtonMap.get("playButton-" + (resultList[index].trackId))[0]}}</button>
                    </div>
                 </div>
 
@@ -178,7 +176,7 @@
                      <a v-else :href= "resultList[index+1].trackViewUrl"> Link</a>
                    </div>
                    <div class="tab-content-box">
-                     <button>{{playbutton}}</button>
+                     <button @click = "playButtonHandler(resultList[index+1].trackId)">{{playButtonMap.get("playButton-" + (resultList[index+1].trackId))[0]}}</button>
                    </div>  
                 </div>
 
