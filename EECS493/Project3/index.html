@@ -79,6 +79,26 @@
               <li :class="dropdownThirdButton"> <a @click="sortButtonHandler(2)" href="#">Price</a></li>
             </ul>
           </div>
+          
+          <div class="modal fade" id="popup" role="dialog">
+            <div class="modal-dialog">
+         
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">{{collectionName}}</h4>
+                </div>
+                <ul  v-for= "(item, index) in songsList" v-if= "index != 0" class="modal-body">
+                   <li style="margin-left: 20px;">{{item.trackName}}</li>
+                </ul>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
       
        <div  v-for= "(item, index) in resultList" v-if= "index % 2 ==0">
          <div class = "col-lg-6 col-md-6 col-sm-6" style='margin-bottom: 50px; display: inline; height: 250px' v-if=" genereButtonSelectedSet.has(resultList[index].primaryGenreName)" >
@@ -119,9 +139,6 @@
                      <h4 v-if="resultList[index].trackViewUrl == undefined">No information provided</h4> 
                      <a v-else :href= "resultList[index].trackViewUrl"> Link</a>
                    </div>
-                   <div class="tab-content-box">
-                     <button @click = "playButtonHandler(resultList[index].trackId)">{{playButtonMap.get("playButton-" + (resultList[index].trackId))[0]}}</button>
-                   </div>
                 </div>
 
                 <div :id="'Track' + index" class="tab-pane fade">
@@ -135,6 +152,11 @@
                      <span>{{resultList[index].country}}</span>
                    </div>  
                 </div>
+                <div class="tab-content-box">
+                  <button type="button" class="btn" @click = "playButtonHandler(resultList[index].trackId)">{{playButtonMap.get("playButton-" + (resultList[index].trackId))[0]}}</button>
+                  <button type="button" class="btn" data-toggle="modal" data-target="#popup" @click = "collectionSongsPopupHandler(resultList[index].collectionId)">Songs</button>
+                </div>
+                
              </div>
            </div>
          </div>
@@ -172,12 +194,10 @@
                    </div>
 
                    <div class="tab-content-box">
+                     <h4 class="inline-block">Preview: </h4> 
                      <h4 v-if="resultList[index+1].trackViewUrl == undefined">No information provided</h4> 
                      <a v-else :href= "resultList[index+1].trackViewUrl"> Link</a>
                    </div>
-                   <div class="tab-content-box">
-                     <button @click = "playButtonHandler(resultList[index+1].trackId)">{{playButtonMap.get("playButton-" + (resultList[index+1].trackId))[0]}}</button>
-                   </div>  
                 </div>
 
                 <div :id="'Track' + index + 1" class="tab-pane fade">
@@ -191,6 +211,10 @@
                      <span>{{resultList[index+1].country}}</span>
                    </div>  
                 </div>
+                <div class="tab-content-box">
+                  <button type="button" class="btn" @click = "playButtonHandler(resultList[index+1].trackId)">{{playButtonMap.get("playButton-" + (resultList[index+1].trackId))[0]}}</button>
+                  <button type="button" class="btn" data-toggle="modal" data-target="#popup" @click = "collectionSongsPopupHandler(resultList[index+1].collectionId)">Songs</button>
+               </div>  
              </div>
            </div>
          </div>

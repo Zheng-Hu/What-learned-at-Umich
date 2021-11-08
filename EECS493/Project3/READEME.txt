@@ -1,0 +1,6 @@
+I have added two more functions.
+
+1. A paly button that can play music of the track, after clicking play button, it will play music and switch to stop button. 
+   If click stop button, it will stop playing music and swtich to play button.
+2. A songs button that after clicking it, it will has a popup that shows the collections name and all songs name in this 
+   collection.

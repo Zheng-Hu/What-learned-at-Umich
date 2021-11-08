@@ -6,6 +6,7 @@ new Vue({
       playbutton:"play",
       allModel:true,
       info: null,
+      songs: null,
       searchValue:'',
       initialList:[],
       resultList:[],
@@ -17,6 +18,8 @@ new Vue({
       dropdownFirstButton:'active',
       dropdownSecondButton:'inactive',
       dropdownThirdButton:'inactive',
+      songsList: [],
+      collectionName: '',
     }
   },
   methods:{
@@ -28,6 +31,11 @@ new Vue({
       .get('https://cors-anywhere.herokuapp.com/itunes.apple.com/search?attribute=allArtistTerm&term=' + this.searchValue )
       .then(response => (this.info = response));
       console.log(this.info)
+      // await axios
+      // .get('https://music.apple.com/us/album/kings-of-summer-single-version/1160446179?i=1160446542&uo=4' )
+      // .then(response => (this.info = response));
+      // console.log(info)
+      // https://itunes.apple.com/lookup?collectionid=211192863&entity=song
       
       // alter when there is no artist found
       if (this.info.data.resultCount == 0) {
@@ -146,6 +154,14 @@ new Vue({
         this.playButtonMap.get("playButton-" + playButtonIndex)[1].pause();
       }
     },
+    async collectionSongsPopupHandler(collectionId){
+      await axios
+      .get('https://cors-anywhere.herokuapp.com/itunes.apple.com/lookup?id=' + collectionId + '&entity=song')
+      .then(response => (this.songs = response));
+      this.collectionName = this.songs.data.results[0].collectionName;
+      this.songsList = this.songs.data.results;
+      console.log(this.songsList);
+    }
   }
 })
 
